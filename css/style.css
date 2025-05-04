@@ -1,0 +1,108 @@
+/* Reset dan dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1.5em 0;
+}
+header .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  font-size: 2em;
+  margin: 0;
+}
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin-left: 1.5em;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Main Content */
+main {
+  padding: 3em 0;
+  background-color: white;
+}
+main .container {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+h2 {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+p {
+  font-size: 1.1em;
+  margin-bottom: 1.5em;
+  color: #555;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  flex-wrap: wrap;
+}
+.btn {
+  padding: 0.75em 1.5em;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+}
+.btn:hover {
+  background-color: #2980b9;
+}
+
+/* Footer */
+footer {
+  background-color: #34495e;
+  color: white;
+  text-align: center;
+  padding: 1.5em 0;
+  margin-top: 3em;
+}
+footer p {
+  font-size: 1em;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fefefe;
+  padding: 0,9em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1em;
+}
