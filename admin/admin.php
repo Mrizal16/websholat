@@ -1,7 +1,5 @@
 <?php
 require '../koneksi.php';
-
-// Ambil data untuk edit jika ada parameter edit
 $data = [];
 if (isset($_GET['edit'])) {
     $id = $_GET['edit'];
@@ -9,7 +7,6 @@ if (isset($_GET['edit'])) {
     $stmt->execute([':id' => $id]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Ambil isi CLOB sebagai string
     $data = [
         'ID' => $row['ID'],
         'JENIS_SHOLAT' => $row['JENIS_SHOLAT'],

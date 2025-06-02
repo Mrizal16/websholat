@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 
-// Ambil data bacaan sholat Subuh dan urutkan berdasarkan urutan
+// Ambil data bacaan sholat Witir dan urutkan berdasarkan urutan
 $sql = "SELECT * FROM sholat_sunnah WHERE jenis_sholat = 'Witir' ORDER BY urutan ASC";
 $stmt = $pdo->query($sql);
 ?>
@@ -63,34 +63,34 @@ $stmt = $pdo->query($sql);
     }
 
     .bacaan-item .details {
-      display: none; /* Start as hidden */
+      display: none;
       margin-top: 20px;
     }
 
     .bacaan-item.active .details {
-      display: block; /* Show when active */
+      display: block;
     }
 
     .bacaan-item button {
-  padding: 15px 0;
-  background-color: #5c6bc0;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%; /* Menjadikan tombol selebar kontainer */
-  font-size: 18px;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
+      padding: 15px 0;
+      background-color: #5c6bc0;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 18px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
 
-.bacaan-item button:hover {
-  background-color: #3f4f9a;
-}
+    .bacaan-item button:hover {
+      background-color: #3f4f9a;
+    }
 
     .btn-kembali {
       display: inline-block;
-      margin-bottom: 20px;
+      margin-top: 20px;
       padding: 10px 18px;
       background-color: #34495e;
       color: #fff;
@@ -105,7 +105,6 @@ $stmt = $pdo->query($sql);
     }
   </style>
   <script>
-    // JavaScript to toggle the display of the details when a button is clicked
     function toggleDetails(id) {
       const bacaanItem = document.getElementById(id);
       bacaanItem.classList.toggle('active');
@@ -119,23 +118,25 @@ $stmt = $pdo->query($sql);
     <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
       <div class="bacaan-item" id="bacaan-<?= $row['URUTAN'] ?>">
         <div class="urutan">
-        <button onclick="toggleDetails('bacaan-<?= $row['URUTAN'] ?>')">Urutan: <?= $row['URUTAN'] ?> - <?= $row['NAMA_BACAAN'] ?></button>
+          <button onclick="toggleDetails('bacaan-<?= $row['URUTAN'] ?>')">
+            Urutan: <?= $row['URUTAN'] ?> - <?= htmlspecialchars($row['NAMA_BACAAN']) ?>
+          </button>
         </div>
-        
+
         <div class="details">
           <?php 
-            // Mengonversi CLOB (ARAB, LATIN, TERJEMAHAN) menjadi string yang bisa ditampilkan
             $arab = is_resource($row['ARAB']) ? stream_get_contents($row['ARAB']) : $row['ARAB'];
             $latin = is_resource($row['LATIN']) ? stream_get_contents($row['LATIN']) : $row['LATIN'];
             $terjemahan = is_resource($row['TERJEMAHAN']) ? stream_get_contents($row['TERJEMAHAN']) : $row['TERJEMAHAN'];
+            $audioPath = !empty($row['AUDIO']) ? '/tuntunan-sholat-full/' . $row['AUDIO'] : '';
           ?>
 
           <p style="font-size:30px; color: #004d40"><?= nl2br(htmlspecialchars($arab)) ?></p>
           <p><i><?= nl2br(htmlspecialchars($latin)) ?></i></p>
           <p><?= nl2br(htmlspecialchars($terjemahan)) ?></p>
 
-          <?php if (!empty($row['AUDIO'])): ?>
-            <audio controls src="<?= htmlspecialchars($row['AUDIO']) ?>"></audio>
+          <?php if (!empty($audioPath)): ?>
+            <audio controls src="<?= htmlspecialchars($audioPath) ?>"></audio>
           <?php endif; ?>
         </div>
       </div>

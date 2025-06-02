@@ -118,7 +118,9 @@ $stmt = $pdo->query($sql);
     <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
       <div class="bacaan-item" id="bacaan-<?= $row['URUTAN'] ?>">
         <div class="urutan">
-        <button onclick="toggleDetails('bacaan-<?= $row['URUTAN'] ?>')">Urutan: <?= $row['URUTAN'] ?> - <?= $row['NAMA_BACAAN'] ?></button>
+          <button onclick="toggleDetails('bacaan-<?= $row['URUTAN'] ?>')">
+            Urutan: <?= $row['URUTAN'] ?> - <?= htmlspecialchars($row['NAMA_BACAAN']) ?>
+          </button>
         </div>
         
         <div class="details">
@@ -127,6 +129,7 @@ $stmt = $pdo->query($sql);
             $arab = is_resource($row['ARAB']) ? stream_get_contents($row['ARAB']) : $row['ARAB'];
             $latin = is_resource($row['LATIN']) ? stream_get_contents($row['LATIN']) : $row['LATIN'];
             $terjemahan = is_resource($row['TERJEMAHAN']) ? stream_get_contents($row['TERJEMAHAN']) : $row['TERJEMAHAN'];
+            $audioPath = !empty($row['AUDIO']) ? '/tuntunan-sholat-full/' . $row['AUDIO'] : '';
           ?>
 
           <p style="font-size:30px; color: #004d40"><?= nl2br(htmlspecialchars($arab)) ?></p>
@@ -134,7 +137,7 @@ $stmt = $pdo->query($sql);
           <p><?= nl2br(htmlspecialchars($terjemahan)) ?></p>
 
           <?php if (!empty($row['AUDIO'])): ?>
-            <audio controls src="<?= htmlspecialchars($row['AUDIO']) ?>"></audio>
+            <audio controls src="<?= htmlspecialchars($audioPath) ?>"></audio>
           <?php endif; ?>
         </div>
       </div>

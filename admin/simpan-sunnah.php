@@ -1,7 +1,6 @@
 <?php
 require '../koneksi.php';
 
-// Ambil data dari form
 $id           = $_POST['id'] ?? null;
 $jenis_sholat = $_POST['jenis_sholat'];
 $nama_bacaan  = $_POST['nama_bacaan'];
@@ -21,9 +20,7 @@ if (!empty($_FILES['audio']['name'])) {
     $audio_path = "uploads/" . $audio_name;
 }
 
-// Simpan atau update data
 if ($id) {
-    // Update
     $sql = "UPDATE sholat_sunnah SET 
                 jenis_sholat = :jenis_sholat, 
                 nama_bacaan = :nama_bacaan, 
